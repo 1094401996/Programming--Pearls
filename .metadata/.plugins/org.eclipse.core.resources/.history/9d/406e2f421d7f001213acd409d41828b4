@@ -1,0 +1,40 @@
+package problemB__Rotation;
+/**
+ * 利用的思想是(x^r y^r)^r = yx (其中x^r表示对x进行逆序操作)
+   例如：字符串是abcdefgh，i=3
+   那么可以看作x=abc；y=defgh
+   则x^r = cba;  y^r = hgfed（类似线性代数的转置吧）
+   则(x^r y^r) = cbahgfed
+   因此(x^r y^r)^r = defghabc = yx
+   因此需要是三次反转就可以实现字符串的旋转了，用伪代码表示为：
+   reverse(0, i-1);
+   reverse(i, n-1);
+   reverse(0,n-1);
+ * @author gengchen
+ *
+ */
+public class Rotation {
+	public static void main(String[]args){
+		char[] arr = {'a','b','c','d','e','f','g'};
+		System.out.println(new String(arr));
+		int i = 3;
+		if(i == 0 || i >=arr.length){
+			System.out.println("wrong parameter");
+
+			return ;
+		}else
+		rotate(arr,i);
+		System.out.println(new String(arr));
+	}
+	public static void rotate(char[]arr,int i ){
+		   reverse(0, i-1,arr);
+		   reverse(i, arr.length - 1,arr);
+		   reverse(0,arr.length -1 ,arr);
+	}
+	private static void reverse(int low,int high,char[]arr){
+		for (int i = low ; i < (low + high - 1) / 2;  i++){
+			char temp = arr[i];
+			arr[i] = arr[high-i+low]; 
+		}
+	}
+}
